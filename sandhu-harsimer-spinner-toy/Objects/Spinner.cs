@@ -11,33 +11,69 @@ namespace sandhu_harsimer_spinner_toy.Objects
     public class Spinner
     {
         Vector2 middle_position = new Vector2();
+        float center_size = 110f;
+        float ring_outer = 180f;
+        float ring_width = 40f;
 
         SpinnerKnob knob = new SpinnerKnob();
+
         public void Setup()
         {
-            middle_position.X = 200;
-            middle_position.Y = 200;
-            knob.Setup(middle_position);
-        }
-        public void Update()
-        {
-            draw_outer_ring(middle_position);
-            draw_self(middle_position);
-            knob.Update();
+            middle_position.X = 400;
+            middle_position.Y = 300;
+            knob.Setup(middle_position.X, middle_position.Y, center_size*1.2f);
         }
 
-        public void draw_self(Vector2 position, float size = 40.0f)
+        public void Update()
         {
-            Draw.FillColor = Color.Yellow;
-            Draw.Circle(position, size);
+            knob.Update();
+            draw_outer_ring(middle_position);
+            draw_self(middle_position);
         }
-        public void draw_outer_ring(Vector2 position, float size = 60.0f, float ring_width = 15.0f)
+
+        public void draw_self(Vector2 position)
         {
+            Draw.LineSize = 1;
+            Draw.FillColor = Color.Yellow;
+            Draw.Circle(position, center_size);
+        }
+
+        public void draw_outer_ring(Vector2 position)
+        {
+            Draw.LineSize = 1;
             Draw.FillColor = Color.Gray;
-            Draw.Circle(position, size);
-            float new_size = size-ring_width;
+            Draw.Circle(position, ring_outer);
             Draw.FillColor = Color.White;
-            Draw.Circle(position, new_size);
+            Draw.Circle(position, ring_outer - ring_width);
+        }
+
+        public void draw_knob()
+        {
+            knob.draw_needle();
+        }
+
+        // Each hit reverses the spin and speeds it up a little bit
+        public void on_hit()
+        {
+            knob.flip_direction();
+            knob.change_speed(0.15f);
+        }
+        public void change_knob_speed(float speed)
+        {
+            knob.change_speed(speed);
+        }
+
+        public float get_angle()
+        {
+            return knob.get_angle();
+        }
+        public Vector2 get_center()
+        {
+            return middle_position;
+        }
+        public float get_ring_middle()
+        {
+            return ring_outer - ring_width / 2;
         }
     }
 }
