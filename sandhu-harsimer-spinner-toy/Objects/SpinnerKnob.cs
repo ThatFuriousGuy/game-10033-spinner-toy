@@ -10,7 +10,8 @@ namespace sandhu_harsimer_spinner_toy.Objects
     {
         float origin_x = 0f;
         float origin_y = 0f;
-        float start_distance = 40f;  // where the first dot sits (edge of the yellow circle)
+        // where the first dot sits (edge of the yellow circle)
+        float start_distance = 40f;
         float angle = 0f;
         float spin_speed = 2f;
         // 1 = going right, -1 going left. serves as a multiplier to affect direction
@@ -76,9 +77,16 @@ namespace sandhu_harsimer_spinner_toy.Objects
             dir *= -1;
         }
 
-        public void change_speed(float amount)
+        public void change_speed(float amount, bool force_set = false)
         {
-            spin_speed += amount;
+            if (force_set == false)
+            {
+                spin_speed += amount;
+            }
+            else if (force_set)
+            {
+                spin_speed = amount;
+            }
 
             if (spin_speed > max_speed)
             {

@@ -58,9 +58,9 @@ namespace sandhu_harsimer_spinner_toy.Objects
             knob.flip_direction();
             knob.change_speed(0.15f);
         }
-        public void change_knob_speed(float speed)
+        public void change_knob_speed(float speed, bool force_set)
         {
-            knob.change_speed(speed);
+            knob.change_speed(speed, force_set);
         }
 
         public float get_angle()
@@ -74,6 +74,10 @@ namespace sandhu_harsimer_spinner_toy.Objects
         public float get_ring_middle()
         {
             return ring_outer - ring_width / 2;
+        }
+        public void hit_missed()
+        {
+
         }
     }
 }

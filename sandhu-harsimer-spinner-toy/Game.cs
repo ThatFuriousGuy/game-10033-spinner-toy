@@ -73,7 +73,9 @@ namespace MohawkGame2D
                 }
                 if (buffer == 1)
                 {
-                    spinner.change_knob_speed(-0.2f);
+                    spinner.change_knob_speed(-0.2f, true);
+                    score = 0;
+                    spinner.hit_missed();
                 }
                 buffer -= 1;
 
