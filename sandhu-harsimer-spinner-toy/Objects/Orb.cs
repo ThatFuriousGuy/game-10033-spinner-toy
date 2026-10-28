@@ -4,7 +4,15 @@ using System.Text;
 
 namespace sandhu_harsimer_spinner_toy.Objects
 {
-    internal class Orb
+    public class Orb
     {
+        public void Setup()
+        {
+
+        }
+        public void Update()
+        {
+
+        }
     }
 }

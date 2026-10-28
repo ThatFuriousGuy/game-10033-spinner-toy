@@ -1,4 +1,5 @@
 ﻿// Include the namespaces (code libraries) you need below.
+using sandhu_harsimer_spinner_toy.Objects;
 using System;
 using System.Numerics;
 
@@ -24,13 +25,15 @@ namespace MohawkGame2D
 
     public class Game
     {
-        /// <summary>
-        ///     Setup runs once before the game loop begins.
-        /// </summary>
+        // Reference to the spinner itself
+        Spinner spinner = new Spinner();
+        // Reference to the orb that spawns on the outer ring
+        Orb orb = new Orb();
         public void Setup()
         {
             Window.SetSize(400, 400);
             Window.SetTitle("Spinner Toy");
+            spinner.Setup();
         }
 
         /// <summary>
@@ -39,6 +42,7 @@ namespace MohawkGame2D
         public void Update()
         {
             Window.ClearBackground(Color.White);
+            spinner.Update();
         }
     }
 
