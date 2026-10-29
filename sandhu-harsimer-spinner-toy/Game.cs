@@ -14,12 +14,12 @@ namespace MohawkGame2D
     // followed by a smaller white circle, still bigger than central circle, --DONE--
     // then draw the main central circle --DONE--
 
-    // Have 1 circle draw on a random spot on the ring (I hate math)
+    // Have 1 circle draw on a random spot on the ring (I hate math) --DONE--
 
     // Make a thin line that spins around the main circle on the ring, always pointing away (Ugh more math) --DONE--
 
-    // Upon hitting space, check of line is within the small circle on ring,
-    // if so, make it spawn somewhere else on the ring, and grant one point to player
+    // Upon hitting space, check of line is within the small circle on ring, --DONE--
+    // if so, make it spawn somewhere else on the ring, and grant one point to player --DONE--
 
 
     public class Game
@@ -37,9 +37,11 @@ namespace MohawkGame2D
         {
             Window.SetSize(800, 600);
             Window.SetTitle("Spinner Toy");
+            // Calling setup so the main spinner can setup its own logic, and setup logic for the knob
             spinner.Setup();
 
             Vector2 center = spinner.get_center();
+            // The orb has to know where the main spinner is, so it can position itself around it correctly
             orb.Setup(center.X, center.Y, spinner.get_ring_middle());
         }
 
@@ -57,6 +59,8 @@ namespace MohawkGame2D
 
             handle_input();
         }
+        // All this does is to display both current score and max score of the session
+        // using text width (.Length) in the math so the text stays mostly centered no matter what
         void draw_score()
         {
             string score_text = $"Score: {score}";
@@ -77,6 +81,8 @@ namespace MohawkGame2D
         }
         void handle_input()
         {
+            // When pressing space, it puts the buffer on the timer
+            // While its above 0, it acts as if you pressed it during those frames
             if (Input.IsKeyboardKeyPressed(KeyboardKey.Space))
             {
                 buffer += 10;

@@ -35,10 +35,8 @@ namespace sandhu_harsimer_spinner_toy.Objects
             draw_self(middle_position);
             handle_hurt_color();
         }
-        public float get_knob_speed()
-        {
-            return knob.spin_speed;
-        }
+        // When you miss the orb, it starts a timer, and this func makes it so that it goes through the array, using the
+        // hurt_timer as the index for the Array, going back to main yellow color
         public void handle_hurt_color()
         {
             if (hurt_timer > -1)
@@ -79,7 +77,7 @@ namespace sandhu_harsimer_spinner_toy.Objects
         {
             knob.change_speed(speed, force_set);
         }
-
+        // the rest here are just functions for other logic, nothing really special
         public float get_angle()
         {
             return knob.get_angle();

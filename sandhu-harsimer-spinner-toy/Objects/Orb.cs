@@ -46,14 +46,14 @@ namespace sandhu_harsimer_spinner_toy.Objects
         {
             float diff = knob_angle - angle;
             diff = diff % (MathF.PI * 2);
-            if (diff > MathF.PI)
+            if (diff > MathF.PI) // Uses DUMB PI and uses it to check if the angle is the same as the knob
             {
                 diff -= MathF.PI * 2;
-            }
+            } // SCREW ALL OF THIS MATH
             if (diff < -MathF.PI)
             {
                 diff += MathF.PI * 2;
-            }
+            }// This block is to make sure "diff" stays within a range
             diff = MathF.Abs(diff);
 
             // How wide the orb is and if the knob is on it
