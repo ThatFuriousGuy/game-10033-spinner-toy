@@ -35,11 +35,15 @@ namespace sandhu_harsimer_spinner_toy.Objects
             draw_self(middle_position);
             handle_hurt_color();
         }
+        public float get_knob_speed()
+        {
+            return knob.spin_speed;
+        }
         public void handle_hurt_color()
         {
             if (hurt_timer > -1)
             {
-                main_color = hurt_color_ramp[hurt_timer];
+                main_color = hurt_color_ramp[hurt_timer/2];
                 hurt_timer -= 1;
             }
         }
@@ -90,7 +94,7 @@ namespace sandhu_harsimer_spinner_toy.Objects
         }
         public void hit_missed()
         {
-            hurt_timer = 5;
+            hurt_timer = 10;
         }
     }
 }

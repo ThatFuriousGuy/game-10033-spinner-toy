@@ -13,10 +13,10 @@ namespace sandhu_harsimer_spinner_toy.Objects
         // where the first dot sits (edge of the yellow circle)
         float start_distance = 40f;
         float angle = 0f;
-        float spin_speed = 2f;
+        public float spin_speed = 2f;
         // 1 = going right, -1 going left. serves as a multiplier to affect direction
         int dir = 1;
-        float max_speed = 12f;
+        float max_speed = 50f;
         // how many circles to make the knob
         int dot_count = 8;
         // the width of the knob line

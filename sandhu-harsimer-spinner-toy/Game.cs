@@ -50,10 +50,38 @@ namespace MohawkGame2D
             Window.ClearBackground(Color.White);
 
             spinner.Update();
+            draw_score();
+            draw_speed();
             orb.Update();
             spinner.draw_knob();
 
             handle_input();
+        }
+        void draw_speed()
+        {
+            string score_text = $"Speed: {spinner.get_knob_speed():F2}";
+            int size = 32;
+            float text_width = score_text.Length * size * 0.6f;
+
+            float x = 410 - text_width / 2;
+            float y = 320 - size / 2;
+
+            Text.Color = Color.Black;
+            Text.Size = size;
+            Text.Draw(score_text, x, y);
+        }
+        void draw_score()
+        {
+            string score_text = $"{score}";
+            int size = 64;
+            float text_width = score_text.Length * size * 0.6f;
+
+            float x = 400 - text_width / 2;
+            float y = 280 - size / 2;
+
+            Text.Color = Color.Black;
+            Text.Size = size;
+            Text.Draw(score_text, x, y);
         }
         void handle_input()
         {
