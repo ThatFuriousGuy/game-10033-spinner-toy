@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
+using System.Threading;
 
 namespace sandhu_harsimer_spinner_toy.Objects
 {
@@ -14,6 +15,9 @@ namespace sandhu_harsimer_spinner_toy.Objects
         float center_size = 110f;
         float ring_outer = 180f;
         float ring_width = 40f;
+        Color main_color = Color.Yellow;
+        int hurt_timer = 0;
+        Color[] hurt_color_ramp = [Color.Yellow, new(255, 201, 0), new(255, 99, 1), new(255, 62, 35), new(255, 29, 6), Color.Red];
 
         SpinnerKnob knob = new SpinnerKnob();
 
@@ -29,12 +33,21 @@ namespace sandhu_harsimer_spinner_toy.Objects
             knob.Update();
             draw_outer_ring(middle_position);
             draw_self(middle_position);
+            handle_hurt_color();
+        }
+        public void handle_hurt_color()
+        {
+            if (hurt_timer > -1)
+            {
+                main_color = hurt_color_ramp[hurt_timer];
+                hurt_timer -= 1;
+            }
         }
 
         public void draw_self(Vector2 position)
         {
             Draw.LineSize = 1;
-            Draw.FillColor = Color.Yellow;
+            Draw.FillColor = main_color;
             Draw.Circle(position, center_size);
         }
 
@@ -77,7 +90,7 @@ namespace sandhu_harsimer_spinner_toy.Objects
         }
         public void hit_missed()
         {
-
+            hurt_timer = 5;
         }
     }
 }
