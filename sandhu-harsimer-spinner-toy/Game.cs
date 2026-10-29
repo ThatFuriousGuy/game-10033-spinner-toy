@@ -29,6 +29,7 @@ namespace MohawkGame2D
         // Reference to the orb that spawns on the outer ring
         Orb orb = new Orb();
         // Gonna use this to potentially affect difficulty at higher scores
+        int max_score = 0;
         int score = 0;
         // Acts as an input buffer holder
         int buffer = 0;
@@ -51,37 +52,28 @@ namespace MohawkGame2D
 
             spinner.Update();
             draw_score();
-            draw_speed();
             orb.Update();
             spinner.draw_knob();
 
             handle_input();
         }
-        void draw_speed()
-        {
-            string score_text = $"Speed: {spinner.get_knob_speed():F2}";
-            int size = 32;
-            float text_width = score_text.Length * size * 0.6f;
-
-            float x = 410 - text_width / 2;
-            float y = 320 - size / 2;
-
-            Text.Color = Color.Black;
-            Text.Size = size;
-            Text.Draw(score_text, x, y);
-        }
         void draw_score()
         {
-            string score_text = $"{score}";
-            int size = 64;
+            string score_text = $"Score: {score}";
+            string max_text = $"Max Score: {max_score}";
+            int size = 30;
             float text_width = score_text.Length * size * 0.6f;
+            float text_width2 = max_text.Length * size * 0.6f;
 
             float x = 400 - text_width / 2;
-            float y = 280 - size / 2;
+            float y = 275 - size / 2;
+            float x2 = 405 - text_width2 / 2;
+            float y2 = 300 - size / 2;
 
             Text.Color = Color.Black;
             Text.Size = size;
             Text.Draw(score_text, x, y);
+            Text.Draw(max_text, x2, y2);
         }
         void handle_input()
         {
@@ -98,6 +90,10 @@ namespace MohawkGame2D
                     orb.hit(spinner.get_angle());
                     spinner.on_hit();
                     buffer = 0;
+                    if (max_score <= score)
+                    {
+                        max_score = score;
+                    }
                 }
                 if (buffer == 1)
                 {
@@ -106,6 +102,7 @@ namespace MohawkGame2D
                     spinner.hit_missed();
                 }
                 buffer -= 1;
+
 
             }
         }
